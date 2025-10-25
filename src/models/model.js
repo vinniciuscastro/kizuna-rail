@@ -21,12 +21,26 @@ export const getRouteById = async (routeId) => {
     return db().routes.find(route => route.id == routeId) || null;
 };
 
-export const getRoutesByRegion = async (region) => {
-    return db().routes.filter(route => route.region.toLowerCase() == region.toLowerCase());
-};
+// export const getRoutesByRegion = async (region) => {
+//     return db().routes.filter(route => route.region.toLowerCase() == region.toLowerCase());
+// };
 
-export const getRoutesBySeason = async (season) => {
-    return db().routes.filter(route => route.bestSeason.toLowerCase() == season.toLowerCase());
+// export const getRoutesBySeason = async (season) => {
+//     return db().routes.filter(route => route.bestSeason.toLowerCase() == season.toLowerCase());
+// };
+
+export const getRoutesByRegionAndSeason = async (region, season) => {
+    let routes = db().routes;
+
+    if (region) {
+        routes = routes.filter(r => r.region.toLowerCase() === region.toLowerCase());
+    }
+
+    if (season) {
+        routes = routes.filter(r => r.bestSeason.toLowerCase() === season.toLowerCase());
+    }
+
+    return routes;
 };
 
 export const getRoutesByMonth = async (month) => {
