@@ -28,19 +28,22 @@ export const getRouteById = async (routeId) => {
 // export const getRoutesBySeason = async (season) => {
 //     return db().routes.filter(route => route.bestSeason.toLowerCase() == season.toLowerCase());
 // };
-
 export const getRoutesByRegionAndSeason = async (region, season) => {
-    let routes = db().routes;
+    let filteredRoutes = db().routes;
 
     if (region) {
-        routes = routes.filter(r => r.region.toLowerCase() === region.toLowerCase());
+        filteredRoutes = filteredRoutes.filter(route =>
+            route.region.toLowerCase() === region.toLowerCase()
+        );
     }
 
     if (season) {
-        routes = routes.filter(r => r.bestSeason.toLowerCase() === season.toLowerCase());
+        filteredRoutes = filteredRoutes.filter(route =>
+            route.bestSeason.toLowerCase() === season.toLowerCase()
+        );
     }
 
-    return routes;
+    return filteredRoutes;
 };
 
 export const getRoutesByMonth = async (month) => {
