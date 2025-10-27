@@ -406,14 +406,232 @@ article.confirmation-page {
 }
 
 @media print {
+    /* Reset page margins for clean printing */
+    @page {
+        margin: 0.5in;
+        size: letter portrait;
+    }
+
+    /* Global print styles */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Hide navigation, footer, and action buttons */
+    header,
+    footer,
+    nav,
+    .confirmation-actions {
+        display: none !important;
+    }
+
     article.confirmation-page {
-        .confirmation-actions {
-            display: none;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        page-break-after: avoid;
+
+        /* Confirmation header */
+        .confirmation-header {
+            background-color: white !important;
+            border: 2px solid black;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            page-break-inside: avoid;
+
+            .success-icon {
+                display: none;
+            }
+
+            .confirmation-title {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .confirmation-message {
+                font-size: 0.875rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .booking-reference {
+                background-color: white !important;
+                border: 2px dashed black;
+                padding: 0.5rem 1rem;
+                margin-top: 0.5rem;
+
+                .reference-label {
+                    font-size: 0.75rem;
+                }
+
+                .reference-number {
+                    font-size: 1.25rem;
+                }
+            }
         }
 
-        .confirmation-header {
-            background-color: white;
-            border: 2px solid var(--clr-primary);
+        /* Main content area */
+        .confirmation-content {
+            gap: 1rem;
+
+            .section-title {
+                font-size: 1.125rem;
+                margin-bottom: 0.5rem;
+                padding-bottom: 0.25rem;
+                border-bottom: 1px solid black;
+            }
+
+            /* Booking details */
+            .booking-details {
+                page-break-inside: avoid;
+
+                .details-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 0.5rem;
+
+                    .detail-card {
+                        padding: 0.5rem;
+                        background-color: white !important;
+                        border: 1px solid black;
+                        box-shadow: none;
+                        page-break-inside: avoid;
+
+                        .detail-icon {
+                            font-size: 1.25rem;
+                        }
+
+                        .detail-content {
+                            gap: 0.125rem;
+
+                            .detail-label {
+                                font-size: 0.625rem;
+                            }
+
+                            .detail-value {
+                                font-size: 0.875rem;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /* Passenger information */
+            .passengers-info {
+                page-break-inside: avoid;
+
+                .passengers-list {
+                    gap: 0.5rem;
+
+                    .passenger-info-card {
+                        background-color: white !important;
+                        border: 1px solid black;
+                        box-shadow: none;
+                        page-break-inside: avoid;
+
+                        .passenger-header {
+                            padding: 0.5rem;
+                            background-color: #f5f5f5 !important;
+                            border-bottom: 1px solid black;
+
+                            .passenger-title {
+                                font-size: 0.875rem;
+                            }
+                        }
+
+                        .passenger-details {
+                            padding: 0.5rem;
+                            display: flex;
+                            flex-direction: row;
+                            gap: 1rem;
+
+                            .passenger-detail {
+                                flex: 1;
+                                gap: 0.125rem;
+
+                                .passenger-label {
+                                    font-size: 0.625rem;
+                                }
+
+                                .passenger-value {
+                                    font-size: 0.75rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            /* Next steps */
+            .next-steps {
+                page-break-inside: avoid;
+
+                .steps-list {
+                    gap: 0.5rem;
+
+                    .step-item {
+                        gap: 0.5rem;
+                        page-break-inside: avoid;
+
+                        .step-number {
+                            width: 30px;
+                            height: 30px;
+                            font-size: 0.875rem;
+                            background-color: black !important;
+                            color: white !important;
+                        }
+
+                        .step-content {
+                            padding-top: 0;
+
+                            .step-title {
+                                font-size: 0.875rem;
+                                margin-bottom: 0.125rem;
+                            }
+
+                            .step-description {
+                                font-size: 0.75rem;
+                                line-height: 1.4;
+                            }
+                        }
+                    }
+                }
+            }
+
+            /* Important information */
+            .important-info {
+                padding: 0.5rem;
+                background-color: #f9f9f9 !important;
+                border: 1px solid black;
+                border-left: 4px solid black;
+                page-break-inside: avoid;
+
+                .info-title {
+                    font-size: 0.875rem;
+                    margin-bottom: 0.5rem;
+                }
+
+                .info-list {
+                    gap: 0.25rem;
+
+                    li {
+                        font-size: 0.75rem;
+                        line-height: 1.4;
+                        padding-left: 0.75rem;
+
+                        &::before {
+                            font-size: 0.875rem;
+                        }
+                    }
+                }
+            }
         }
     }
 }
