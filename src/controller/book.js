@@ -1,4 +1,5 @@
 import { createConfirmation, getScheduleById, getTicketOptionsForRoute } from '../models/model.js';
+import { yenToUsd } from '../includes/helpers.js';
 
 const bookingPage = async (req, res) => {
     const { scheduleId } = req.params;
@@ -7,10 +8,16 @@ const bookingPage = async (req, res) => {
 
     const ticketOptions = await getTicketOptionsForRoute(schedule.routeId, scheduleId);
 
+    // Convert ticket prices from Yen to USD
+    const ticketOptionsWithUSD = ticketOptions.map(option => ({
+        ...option,
+        priceUSD: yenToUsd(option.price).toFixed(2)
+    }));
+
     res.render('routes/book', {
         title: 'Book Trip',
         schedule,
-        ticketOptions
+        ticketOptions: ticketOptionsWithUSD
     });
 };
 
